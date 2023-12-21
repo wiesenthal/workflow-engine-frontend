@@ -8,6 +8,7 @@ function App() {
     <div className="App">
       <SocketContext.Provider value={socket}>
         <WorkflowSpace workflowName="step_0" />
+        <WorkflowSpace workflowName="step_1" />
       </SocketContext.Provider>
     </div>
   );
