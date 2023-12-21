@@ -1,0 +1,16 @@
+.WorkflowSpace {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.ExecuteWorkflowButton, .WorkflowOutput {
+    margin: 50px;
+    width: 130px;
+    height: 80px;
+    text-align: center;
+}
+
+.WorkflowOutput {
+    line-height: 80px;
+}
