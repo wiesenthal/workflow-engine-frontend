@@ -9,6 +9,7 @@ function App() {
       <SocketContext.Provider value={socket}>
         <WorkflowSpace workflowName="step_0" />
         <WorkflowSpace workflowName="step_1" />
+        <WorkflowSpace workflowName="step_2" inputVariables={["name"]} />
       </SocketContext.Provider>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface WorkflowOutputProps {
-  output: string[];
+  output: string;
 }
 
 const WorkflowOutput = ({ output }: WorkflowOutputProps) => {

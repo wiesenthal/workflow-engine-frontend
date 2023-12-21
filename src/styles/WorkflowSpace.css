@@ -4,13 +4,9 @@
     margin: auto;
 }
 
-.ExecuteWorkflowButton, .WorkflowOutput {
+.ExecuteWorkflowButton, .WorkflowOutput, .TextFieldInput {
     margin: 50px;
     width: 130px;
     height: 80px;
     text-align: center;
-}
-
-.WorkflowOutput {
-    line-height: 80px;
 }
