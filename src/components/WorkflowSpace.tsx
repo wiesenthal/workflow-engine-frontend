@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SocketContext } from '../context/socket';
 
 import ExecuteWorkflowButton from './ExecuteWorkflowButton';
@@ -6,19 +6,21 @@ import WorkflowOutput from './WorkflowOutput';
 
 import '../styles/WorkflowSpace.css';
 import TextFieldInput from './TextFieldInput';
-import { BackendError, isError } from '../utils/errorUtils';
+import { isError } from '../utils/errorUtils';
+import { SharedError } from '../../../shared/types/error';
 
 interface WorkflowSpaceProps {
   workflowName: string;
-  inputVariables?: string[];
+  isActive?: boolean;
 }
 
-const WorkflowSpace = ({ workflowName, inputVariables }: WorkflowSpaceProps) => {
+const WorkflowSpace = ({ workflowName, isActive }: WorkflowSpaceProps) => {
   const socket = useContext(SocketContext);
   const [output, setOutput] = useState<string>('');
   const [isTaskExecuting, setIsTaskExecuting] = useState<boolean>(false);
+  const [inputVariables, setInputVariables] = useState<string[]>();
 
-  const handleExecutionResult = (response: string | BackendError) => {
+  let handleExecutionResult = (response: string | SharedError) => {
     setIsTaskExecuting(false);
     // detect if response is an error, keeping in mind that the error type is not preserved when sending over socket.io
     if (isError(response)) {
@@ -36,6 +38,28 @@ const WorkflowSpace = ({ workflowName, inputVariables }: WorkflowSpaceProps) => 
     console.log(`Executing workflow ${workflowName}`);
     setIsTaskExecuting(true);
     socket.emit('executeWorkflow', workflowName, handleExecutionResult);
+  }
+
+  const checkInputVariables = () => {
+    socket.emit('checkWorkflowInputs', workflowName, (response: string[] | SharedError) => {
+      if (isError(response)) {
+        console.log(`Failed to check input variables for workflow ${workflowName}, error: ${JSON.stringify(response)}`);
+        return;
+      }
+
+      console.log(`Input variables for workflow ${workflowName} are: ${response}`);
+      setInputVariables(response);
+    });
+  }
+
+  useEffect(() => {
+    checkInputVariables();
+    setOutput('');
+    setIsTaskExecuting(false);
+  }, [workflowName]);
+
+  if (!isActive) {
+    return null;
   }
 
   return (
