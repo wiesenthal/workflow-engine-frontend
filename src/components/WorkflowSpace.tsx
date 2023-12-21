@@ -9,7 +9,7 @@ import TextFieldInput from './TextFieldInput';
 import { isError } from '../utils/errorUtils';
 import { SharedError } from '../../../shared/types/error';
 
-interface WorkflowSpaceProps {
+type WorkflowSpaceProps = {
   workflowName: string;
   isActive?: boolean;
 }

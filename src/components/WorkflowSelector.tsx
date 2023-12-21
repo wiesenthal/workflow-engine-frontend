@@ -1,7 +1,5 @@
 import React from "react";
 
-import "../styles/WorkflowSelector.css";
-
 interface WorkflowSelectorProps {
     workflows: string[];
     selectedWorkflow: string;

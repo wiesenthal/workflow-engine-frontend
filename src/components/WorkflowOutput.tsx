@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface WorkflowOutputProps {
+type WorkflowOutputProps = {
   output: string;
 }
 
