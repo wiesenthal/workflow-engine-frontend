@@ -10,6 +10,7 @@ function App() {
         <WorkflowSpace workflowName="step_0" />
         <WorkflowSpace workflowName="step_1" />
         <WorkflowSpace workflowName="step_2" inputVariables={["name"]} />
+        <WorkflowSpace workflowName="step_3" />
       </SocketContext.Provider>
     </div>
   );
