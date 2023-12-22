@@ -1,11 +1,15 @@
 .selection-container {
-    display: flex;
     flex-direction: row;
 }
 
-.WorkflowSelector {
-    width: min-content;
+.WorkflowSelector, .ChangeDebugModeButton {
+    width: max-content;
     margin: 10px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.ChangeDebugModeButton {
+    flex-direction: row;
+    width: 5;
 }

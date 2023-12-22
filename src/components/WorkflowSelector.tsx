@@ -1,6 +1,6 @@
 import React from "react";
 
-interface WorkflowSelectorProps {
+type WorkflowSelectorProps = {
     workflows: string[];
     selectedWorkflow: string;
     setSelectedWorkflow: (workflow: string) => void;

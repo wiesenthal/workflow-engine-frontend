@@ -24,18 +24,15 @@ const WorkflowSpace = ({ workflowName, isActive }: WorkflowSpaceProps) => {
     setIsTaskExecuting(false);
     // detect if response is an error, keeping in mind that the error type is not preserved when sending over socket.io
     if (isError(response)) {
-      console.log(`Workflow ${workflowName} failed to execute, error: ${JSON.stringify(response)}`);
       setOutput(response.errorMessage);
       return;
     }
 
-    console.log(`Workflow ${workflowName} executed, response: ${response}`);
     setOutput(response);
   }
 
 
   const executeWorkflow = () => {
-    console.log(`Executing workflow ${workflowName}`);
     setIsTaskExecuting(true);
     socket.emit('executeWorkflow', workflowName, handleExecutionResult);
   }
@@ -43,11 +40,9 @@ const WorkflowSpace = ({ workflowName, isActive }: WorkflowSpaceProps) => {
   const checkInputVariables = () => {
     socket.emit('checkWorkflowInputs', workflowName, (response: string[] | SharedError) => {
       if (isError(response)) {
-        console.log(`Failed to check input variables for workflow ${workflowName}, error: ${JSON.stringify(response)}`);
         return;
       }
 
-      console.log(`Input variables for workflow ${workflowName} are: ${response}`);
       setInputVariables(response);
     });
   }
