@@ -16,17 +16,12 @@ type WorkflowSpaceProps = {
 
 const WorkflowSpace = ({ workflowName }: WorkflowSpaceProps) => {
   const socket = useContext(SocketContext);
-  const [output, setOutput] = useState<string>('');
+  const [output, setOutput] = useState<string | SharedError>('');
   const [isTaskExecuting, setIsTaskExecuting] = useState<boolean>(false);
   const [inputVariables, setInputVariables] = useState<string[]>();
 
   const handleExecutionResult = (response: string | SharedError) => {
     setIsTaskExecuting(false);
-    if (isError(response)) {
-      setOutput(response.errorMessage);
-      return;
-    }
-
     setOutput(response);
   }
 

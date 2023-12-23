@@ -46,6 +46,14 @@ const DebugBox = ({ }) => {
                         Workflow "{output.completedWorkflow}" finished.
                     </Box>
                 );
+            } else if (output.error !== undefined) {
+                return (
+                    <Box className="debug-output-line"
+                        color="red"
+                        style={debugOutputStyle}>
+                        {`Error: ${output.error.errorMessage}`}
+                    </Box>
+                );
             }
             return (
                 <Box className="debug-output-line"
