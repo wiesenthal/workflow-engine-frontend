@@ -3,14 +3,14 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import WorkflowSpace from "./WorkflowSpace";
 
 type WorkflowSelectorProps = {
-    workflows: string[];
+    workflowNames: string[];
 }
 
 const TabPanelsShadow: React.CSSProperties = {
     boxShadow: "rgba(35, 35, 65, 0.03) 0px 6px 6px 0px, rgba(36, 36, 70, 0.06) 0px 12px 12px 0px"
 }
 
-const WorkflowSelector = ({ workflows }: WorkflowSelectorProps) => {
+const WorkflowSelector = ({ workflowNames }: WorkflowSelectorProps) => {
     return (
         <Tabs className="WorkflowTabs"
             align="start"
@@ -20,7 +20,7 @@ const WorkflowSelector = ({ workflows }: WorkflowSelectorProps) => {
 
             <TabList overflow="scroll">
 
-                {workflows.map((workflowName, index) => (
+                {workflowNames.map((workflowName, index) => (
 
                     <Tab 
                         key={index}
@@ -49,7 +49,7 @@ const WorkflowSelector = ({ workflows }: WorkflowSelectorProps) => {
                 borderTopLeftRadius={0}
                 style={TabPanelsShadow}>
 
-            {workflows.map((workflowName, index) => (
+            {workflowNames.map((workflowName, index) => (
                 <TabPanel key={index} 
                     width="100%">
 

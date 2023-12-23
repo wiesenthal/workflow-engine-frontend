@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChangeDebugModeButton from "./ChangeDebugModeButton";
 import DebugBox from "./DebugBox";
 import WorkflowSelector from "./WorkflowSelector";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, Spinner } from "@chakra-ui/react";
+import { socket } from "../context/socket";
 
 
-const WORKFLOWS = [
-    'Step 0',
-    'Step 1',
-    'Step 2',
-    'Step 3',
-    'Step 4',
-    'Step 6',
-    'Custom'
-];
+// const WORKFLOWS = [
+//     'Step 0',
+//     'Step 1',
+//     'Step 2',
+//     'Step 3',
+//     'Step 4',
+//     'Step 6',
+//     'Custom'
+// ];
 
 const AppContent = ({ }) => {
     const [debugMode, setDebugMode] = useState<boolean>(false);
+    const [workflowNames, setWorkflowNames] = useState<string[]>();
+
+    const getWorkflowNamesFromServer = async () => {
+        socket.emit('getWorkflowNames', (workflowNames: string[]) => {
+            setWorkflowNames(workflowNames);
+        });
+    }
+    
+    useEffect(() => {
+        getWorkflowNamesFromServer();
+    }, []);
 
     return (
         <Box className="AppContent"
@@ -36,8 +48,12 @@ const AppContent = ({ }) => {
                 Miles' workflow engine
             </Heading>
 
-            <WorkflowSelector
-                workflows={WORKFLOWS} />
+            {workflowNames !== undefined ?
+                <WorkflowSelector
+                    workflowNames={workflowNames} />
+                :
+                <Spinner />
+            }
 
 
             <ChangeDebugModeButton
