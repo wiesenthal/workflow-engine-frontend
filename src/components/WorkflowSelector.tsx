@@ -1,24 +1,66 @@
 import React from "react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import WorkflowSpace from "./WorkflowSpace";
 
 type WorkflowSelectorProps = {
     workflows: string[];
-    selectedWorkflow: string;
-    setSelectedWorkflow: (workflow: string) => void;
 }
 
-const WorkflowSelector = ({ workflows, selectedWorkflow, setSelectedWorkflow }: WorkflowSelectorProps) => {
+const TabPanelsShadow: React.CSSProperties = {
+    boxShadow: "rgba(35, 35, 65, 0.03) 0px 6px 6px 0px, rgba(36, 36, 70, 0.06) 0px 12px 12px 0px"
+}
+
+const WorkflowSelector = ({ workflows }: WorkflowSelectorProps) => {
     return (
-        <select
-            className="WorkflowSelector"
-            value={selectedWorkflow}
-            onChange={(event) => setSelectedWorkflow(event.target.value)}
-        >
-            {workflows.map((workflow) => (
-                <option key={workflow} value={workflow}>
-                    {workflow}
-                </option>
+        <Tabs className="WorkflowTabs"
+            align="start"
+            variant="enclosed"
+            width="100%"
+            colorScheme="tabsScheme">
+
+            <TabList overflow="scroll">
+
+                {workflows.map((workflowName, index) => (
+
+                    <Tab 
+                        key={index}
+                        borderTopRadius="commonRadius"
+                        marginRight={2}
+                        borderBottom="none"
+                        borderColor="slateGray"
+                        _selected={{
+                            bg: "white",
+                            color: "activeColor",
+                        }}
+                        _hover={{
+                            bg: "slateGray",
+                            color: "primaryFont"
+                        }}>
+                        {workflowName}
+                    </Tab>
+
+                ))} 
+
+        </TabList>
+
+            <TabPanels
+                bg="white"
+                borderRadius="commonRadius"
+                borderTopLeftRadius={0}
+                style={TabPanelsShadow}>
+
+            {workflows.map((workflowName, index) => (
+                <TabPanel key={index} 
+                    width="100%">
+
+                    <WorkflowSpace
+                        workflowName={workflowName}
+                        key={index} />
+
+                </TabPanel>
             ))}
-        </select>
+            </TabPanels>
+        </Tabs>
     );
 };
 

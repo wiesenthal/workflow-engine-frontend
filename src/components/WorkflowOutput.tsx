@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react';
 
 type WorkflowOutputProps = {
@@ -6,9 +7,16 @@ type WorkflowOutputProps = {
 
 const WorkflowOutput = ({ output }: WorkflowOutputProps) => {
   return (
-    <div className="WorkflowOutput">
+    <Box className="WorkflowOutput"
+      lineHeight={10}
+      marginX={2}
+      paddingX={2}
+      flexGrow={1}
+      color="primaryFont"
+      overflowX="scroll"
+      style={{textWrap: 'nowrap'}}>
         {output}
-    </div>
+    </Box>
   );
 };
 

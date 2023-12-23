@@ -1,6 +1,7 @@
+import { Button, Spacer } from "@chakra-ui/react";
 import React from "react";
 
-interface ExecuteWorkflowButtonProps {
+type ExecuteWorkflowButtonProps = {
     workflowName: string;
     onClick: () => void;
     disabled: boolean;
@@ -8,13 +9,18 @@ interface ExecuteWorkflowButtonProps {
 
 const ExecuteWorkflowButton = ({ workflowName, onClick, disabled }: ExecuteWorkflowButtonProps) => {
     return (
-        <button 
-            className="ExecuteWorkflowButton"
+        <Button className="ExecuteWorkflowButton"
+            bg="activeColor"
+            _hover={{
+                bg: "darkActiveColor"
+            }}
+            color='white'
             onClick={onClick}
-            disabled={disabled}
-            >
-            Execute workflow {workflowName}
-        </button>
+            isLoading={disabled}
+            minWidth="35%"
+            marginX={2}>
+            Run {workflowName}
+        </Button>
     );
 };
 

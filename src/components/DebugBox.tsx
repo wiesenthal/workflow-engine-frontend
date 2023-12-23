@@ -1,8 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "../context/socket";
 import { DebugOutput } from "../../../shared/types/debug";
+import { Divider } from "@chakra-ui/react";
 
-import '../styles/DebugBox.css';
+import { Box, Code, Heading } from "@chakra-ui/react";
+
+const debugOutputStyle: CSSProperties = {
+    textWrap: "nowrap",
+}
 
 const DebugBox = ({ }) => {
     const socket = useContext(SocketContext);
@@ -35,29 +40,49 @@ const DebugBox = ({ }) => {
         return debugOutputList.map((output: DebugOutput) => {
             if (output.completedWorkflow !== undefined) {
                 return (
-                    <div className="debug-output-line completed-workflow">
+                    <Box className="debug-output-line"
+                        fontWeight="bold"
+                        style={debugOutputStyle}>
                         Workflow "{output.completedWorkflow}" finished.
-                    </div>
+                    </Box>
                 );
             }
             return (
-                <div className="debug-output-line">
+                <Box className="debug-output-line"
+                    style={debugOutputStyle}>
                     {JSON.stringify(output)}
-                </div>
+                </Box>
             );
         });
     }
 
     return (
-        <div className="DebugBox">
-            <h2 className="debug-box-title">Debug Output</h2>
-            <div 
-                className="debug-output-list"
+        <Box className="DebugBox"
+            flexDirection="column"
+            marginBottom={20}
+            minHeight={0}
+            paddingTop={2}
+            width="100%"
+            alignItems="center">
+
+            <Heading className="debug-box-title"
+                fontSize="xl"
+                fontWeight="semibold">
+                Debug Logs
+            </Heading>
+
+            <Divider orientation="horizontal" margin={1}/>
+
+            <Code className="debug-output-list"
                 ref={debugOutputListRef}
-            >
+                overflow="scroll"
+                width="100%">
+
                 {renderDebugOutput(debugOutputs)}
-            </div>
-        </div>
+
+            </Code>
+
+        </Box>
     );
 }
 

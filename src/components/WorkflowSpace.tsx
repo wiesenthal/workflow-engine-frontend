@@ -1,28 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { SocketContext } from '../context/socket';
+import { Box } from "@chakra-ui/react"
+
 
 import ExecuteWorkflowButton from './ExecuteWorkflowButton';
 import WorkflowOutput from './WorkflowOutput';
+import { SocketContext } from '../context/socket';
 
-import '../styles/WorkflowSpace.css';
 import TextFieldInput from './TextFieldInput';
 import { isError } from '../utils/errorUtils';
 import { SharedError } from '../../../shared/types/error';
 
 type WorkflowSpaceProps = {
   workflowName: string;
-  isActive?: boolean;
 }
 
-const WorkflowSpace = ({ workflowName, isActive }: WorkflowSpaceProps) => {
+const WorkflowSpace = ({ workflowName }: WorkflowSpaceProps) => {
   const socket = useContext(SocketContext);
   const [output, setOutput] = useState<string>('');
   const [isTaskExecuting, setIsTaskExecuting] = useState<boolean>(false);
   const [inputVariables, setInputVariables] = useState<string[]>();
 
-  let handleExecutionResult = (response: string | SharedError) => {
+  const handleExecutionResult = (response: string | SharedError) => {
     setIsTaskExecuting(false);
-    // detect if response is an error, keeping in mind that the error type is not preserved when sending over socket.io
     if (isError(response)) {
       setOutput(response.errorMessage);
       return;
@@ -30,7 +29,6 @@ const WorkflowSpace = ({ workflowName, isActive }: WorkflowSpaceProps) => {
 
     setOutput(response);
   }
-
 
   const executeWorkflow = () => {
     setIsTaskExecuting(true);
@@ -53,18 +51,41 @@ const WorkflowSpace = ({ workflowName, isActive }: WorkflowSpaceProps) => {
     setIsTaskExecuting(false);
   }, [workflowName]);
 
-  if (!isActive) {
-    return null;
-  }
-
   return (
-    <div className="WorkflowSpace">
-      {inputVariables?.map((variableName: string, index: number) => (
-        <TextFieldInput key={index} variableName={variableName} />
-      ))}
-      <ExecuteWorkflowButton workflowName={workflowName} onClick={executeWorkflow} disabled={isTaskExecuting} />
-      <WorkflowOutput output={output} />
-    </div>
+    <Box className="WorkflowSpace"
+      flexDirection="column"
+      alignItems="left"
+      width="100%"
+      padding={2}
+      >
+
+      <Box className="workflow-space-button-and-output"
+        flexDirection="row">
+
+        <ExecuteWorkflowButton
+          workflowName={workflowName}
+          onClick={executeWorkflow}
+          disabled={isTaskExecuting} />
+
+        {output !== "" &&
+          <WorkflowOutput output={output} />
+        }
+
+      </Box>
+
+      <Box className="workflow-input-container"
+        flexDirection="row"
+        margin={0}>
+        {inputVariables?.map(
+          (variableName: string, index: number) => (
+            <TextFieldInput
+              variableName={variableName}
+              key={index} />
+          ))}
+      </Box>
+
+
+    </Box>
   );
 };
 
