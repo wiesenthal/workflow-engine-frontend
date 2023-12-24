@@ -3,6 +3,7 @@ import React from 'react';
 import { SharedError } from '../../../shared/types/error';
 import { isError } from '../utils/errorUtils';
 
+
 type WorkflowOutputProps = {
   output: string | SharedError;
 }

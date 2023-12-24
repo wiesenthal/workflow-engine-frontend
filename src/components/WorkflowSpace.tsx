@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Box } from "@chakra-ui/react"
-
-
 import ExecuteWorkflowButton from './ExecuteWorkflowButton';
 import WorkflowOutput from './WorkflowOutput';
 import { SocketContext } from '../context/socket';
-
 import TextFieldInput from './TextFieldInput';
 import { isError } from '../utils/errorUtils';
 import { SharedError } from '../../../shared/types/error';
+
 
 type WorkflowSpaceProps = {
   workflowName: string;

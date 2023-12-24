@@ -1,6 +1,7 @@
 import { Button, Spacer } from "@chakra-ui/react";
 import React from "react";
 
+
 type ExecuteWorkflowButtonProps = {
     workflowName: string;
     onClick: () => void;
@@ -17,7 +18,6 @@ const ExecuteWorkflowButton = ({ workflowName, onClick, disabled }: ExecuteWorkf
             color='white'
             onClick={onClick}
             isLoading={disabled}
-            minWidth="35%"
             marginX={2}>
             Run {workflowName}
         </Button>

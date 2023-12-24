@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Input } from '@chakra-ui/react';
 import { SocketContext } from '../context/socket';
 
+
 type TextFieldInputProps = {
     variableName: string;
 }

@@ -2,12 +2,12 @@ import React, { CSSProperties, useContext, useEffect, useRef, useState } from "r
 import { SocketContext } from "../context/socket";
 import { DebugOutput } from "../../../shared/types/debug";
 import { Divider } from "@chakra-ui/react";
-
 import { Box, Code, Heading } from "@chakra-ui/react";
 
 const debugOutputStyle: CSSProperties = {
     textWrap: "nowrap",
 }
+
 
 const DebugBox = ({ }) => {
     const socket = useContext(SocketContext);

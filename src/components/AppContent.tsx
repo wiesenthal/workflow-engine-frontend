@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ChangeDebugModeButton from "./ChangeDebugModeButton";
+import DebugModeButton from "./DebugModeButton";
 import DebugBox from "./DebugBox";
 import WorkflowSelector from "./WorkflowSelector";
-import { Box, Heading, Spinner } from "@chakra-ui/react";
+import { Box, HStack, Heading, Spinner } from "@chakra-ui/react";
 import { socket } from "../context/socket";
+import CostAuditTracker from "./CostAuditTracker";
 
-
-// const WORKFLOWS = [
-//     'Step 0',
-//     'Step 1',
-//     'Step 2',
-//     'Step 3',
-//     'Step 4',
-//     'Step 6',
-//     'Custom'
-// ];
 
 const AppContent = ({ }) => {
     const [debugMode, setDebugMode] = useState<boolean>(false);
@@ -55,10 +46,16 @@ const AppContent = ({ }) => {
                 <Spinner />
             }
 
+            <HStack className="underBox"
+                width="100%">
 
-            <ChangeDebugModeButton
-                debugMode={debugMode}
-                setDebugMode={setDebugMode} />
+                <CostAuditTracker />
+
+                <DebugModeButton
+                    debugMode={debugMode}
+                    setDebugMode={setDebugMode} />
+
+            </HStack>
 
             {debugMode &&
                 <DebugBox />

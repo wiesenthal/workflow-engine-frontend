@@ -8,7 +8,7 @@ type ChangeDebugModeButtonProps = {
     setDebugMode: (debugMode: boolean) => void;
 }
 
-const ChangeDebugModeButton = ({ debugMode, setDebugMode }: ChangeDebugModeButtonProps) => {
+const DebugModeButton = ({ debugMode, setDebugMode }: ChangeDebugModeButtonProps) => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDebugMode(event.target.checked);
@@ -17,7 +17,7 @@ const ChangeDebugModeButton = ({ debugMode, setDebugMode }: ChangeDebugModeButto
     return (
         <HStack className="ChangeDebugModeButton"
             alignItems="center"
-            alignSelf="end"
+            marginLeft="auto"
             marginTop={2}
             spacing={2}>
 
@@ -32,4 +32,4 @@ const ChangeDebugModeButton = ({ debugMode, setDebugMode }: ChangeDebugModeButto
     );
 };
 
-export default ChangeDebugModeButton;
+export default DebugModeButton;
