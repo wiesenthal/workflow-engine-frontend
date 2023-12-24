@@ -54,6 +54,13 @@ const DebugBox = ({ }) => {
                         {`Error: ${output.error.errorMessage}`}
                     </Box>
                 );
+            } else if (output.plainMessage !== undefined) {
+                return (
+                    <Box className="debug-output-line"
+                        style={debugOutputStyle}>
+                        {output.plainMessage}
+                    </Box>
+                );
             }
             return (
                 <Box className="debug-output-line"
