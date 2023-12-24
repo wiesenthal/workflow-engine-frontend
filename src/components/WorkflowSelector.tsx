@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import WorkflowSpace from "./WorkflowSpace";
+import WorkflowSpaceOrEditor from "./WorkflowSpaceOrEditor";
 
 
 const TabPanelsShadow: React.CSSProperties = {
@@ -57,7 +58,7 @@ const WorkflowSelector = ({ workflowNames }: WorkflowSelectorProps) => {
                     paddingY={2}
                     paddingX={4}>
 
-                    <WorkflowSpace
+                    <WorkflowSpaceOrEditor
                         workflowName={workflowName}
                         key={index} />
 
