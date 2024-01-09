@@ -20,6 +20,7 @@ const WorkflowOutput = ({ output }: WorkflowOutputProps) => {
       marginX={2}
       paddingX={2}
       flexGrow={1}
+      flexBasis={0}
       color={isError(output) ? 'red' : 'primaryFont'}
       overflowX="scroll"
       style={{ textWrap: 'nowrap' }}>
