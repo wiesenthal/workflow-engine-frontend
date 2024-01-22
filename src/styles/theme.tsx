@@ -9,11 +9,11 @@ const theme = extendTheme({
         primaryFont: '#334155',
         secondaryFont: '#64748B',
         background: '#F9FAFB',
-        activeColor: '#5330F7',
-        darkActiveColor: '#3918BF',
+        activeColor: '#e53e73',
+        darkActiveColor: '#d20043',
         slateGray: '#F1F5F9',
         switchScheme: { 
-            500: '#5330F7'
+            500: '#e53e73'
         }
     },
     styles: {

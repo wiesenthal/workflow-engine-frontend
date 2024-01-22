@@ -31,12 +31,12 @@ const AppContent = ({ }) => {
             alignItems="center">
 
             <Heading className="main-heading"
-                marginTop={48}
+                marginTop={20}
                 marginBottom={10}
                 fontSize="32px"
                 fontWeight="semibold"
             >
-                Miles' workflow engine
+                Workflow engine
             </Heading>
 
             {workflowNames !== undefined ?
